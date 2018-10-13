@@ -1,48 +1,49 @@
-const TripModel = require('../model/Trip')
+const DestinationModel = require('../model/Destination')
 
 const findAll = function(req, res, next) {
-    TripModel.find({}, function(error, trips) {
+    DestinationModel.find({}, function(error, Destinations) {
         if (error) {
             res.send(error)
         }
-        res.send(trips)
+        res.send(Destinations)
     })
 }
 
 const find = function(req, res, next) {
     const id = req.params.id
-    TripModel.findById(id, function(error, trip) {
+    DestinationModel.findById(id, function(error, Destination) {
         if (error) {
             res.send(error)
         }
-        res.send(trip)
+        res.send(Destination)
     })
 }
 
 const create = function(req, res, next) {
-    const newTrip = new TripModel(req.body);
-    newTrip.save(function(error) {
+    console.log('req.body', req.body)
+    const newDestination = new DestinationModel(req.body)
+    newDestination.save(function(error) {
         if (error) {
             res.send(error)
         }
-        res.send(newTrip)
+        res.send(newDestination)
     })
 }
 
 const update = function(req, res, next) {
     const id = req.params.id
-    TripModel.updateOne({ _id: id }, req.body, function() {
+    DestinationModel.updateOne({ _id: id }, req.body, function() {
         res.send({message: 'updated'})
     })
 }
 
 const remove = function(req, res, next) {
     const id = req.params.id
-    TripModel.findById(id, function(error, trip) {
+    DestinationModel.findById(id, function(error, Destination) {
         if (error) {
             res.send(error)
         }
-        TripModel.deleteOne({ _id: id }, function (error) {
+        DestinationModel.deleteOne({ _id: id }, function (error) {
             if (error) {
                 res.send(error)
             }

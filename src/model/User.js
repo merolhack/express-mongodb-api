@@ -34,7 +34,9 @@ const UserSchema = new mongoose.Schema({
     },
 })
 
-mongoose.connect('mongodb://localhost:27017/trips-app', { useNewUrlParser: true })
+UserSchema.virtual('name').get(function() {
+    return this.first_name + ' ' + this.last_name
+})
 
 const UserModel = mongoose.model('User', UserSchema)
 module.exports = UserModel

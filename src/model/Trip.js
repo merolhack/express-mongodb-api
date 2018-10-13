@@ -3,7 +3,13 @@ const TripSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    destinations: {
+        type: [String]
+    },
     short_description: {
+        type: String
+    },
+    description: {
         type: String
     },
     date_start: {
@@ -15,6 +21,15 @@ const TripSchema = new mongoose.Schema({
     image: {
         type: String
     },
+    gallery: {
+        type: [String]
+    },
+    price: {
+        type: String
+    },
+    private: {
+        type: Boolean
+    },
     created_at: {
         type : Date,
         default: Date.now
@@ -23,8 +38,6 @@ const TripSchema = new mongoose.Schema({
         type : Date,
     },
 })
-
-mongoose.connect('mongodb://localhost:27017/trips-app', { useNewUrlParser: true })
 
 const TripModel = mongoose.model('Trip', TripSchema)
 module.exports = TripModel
